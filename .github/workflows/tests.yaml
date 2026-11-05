@@ -1,4 +1,5 @@
-name: testes
+
+name: testes-e-publicacao
 
 on:
   push:
@@ -7,6 +8,9 @@ on:
   pull_request:
     branches:
       - main
+
+permissions:
+  contents: read
 
 jobs:
   pytest:
@@ -29,3 +33,30 @@ jobs:
       - name: Executar testes
         run: python -m pytest -v
 
+      - name: Gerar relatorio HTML
+        run: |
+          python -m relatorio dados/vendas.csv --saida relatorio.html
+
+      - name: Preparar arquivo para publicacao
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: relatorio.html
+
+  deploy:
+    needs: pytest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
