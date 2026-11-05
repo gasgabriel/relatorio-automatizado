@@ -37,10 +37,15 @@ jobs:
         run: |
           python -m relatorio dados/vendas.csv --saida relatorio.html
 
-      - name: Preparar arquivo para publicacao
+      - name: Preparar pasta para publicacao
+        run: |
+          mkdir publicacao
+          cp relatorio.html publicacao/index.html
+
+      - name: Enviar artefato para GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: relatorio.html
+          path: publicacao
 
   deploy:
     needs: pytest
