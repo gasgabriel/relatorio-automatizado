@@ -1,12 +1,9 @@
 # Relatório automático de vendas
 
-![testes](https://github.com/gasgabriel/relatorio-vendas/actions/workflows/tests.yml/badge.svg)
-
 Lê uma planilha de vendas (CSV), limpa os dados, calcula os indicadores principais
 e gera um relatório em HTML com **um único comando**. O relatório também mostra quantas linhas foram descartadas e por quê.
 
-
-**[Ver um relatório de exemplo](https://gasgabriel.github.io/relatorio-vendas/relatorio.html)** (dados fictícios)
+**[Ver um relatório de exemplo](https://gasgabriel.github.io/relatorio-automatizado/relatorio.html)** (dados fictícios)
 
 ## Como usar
 
